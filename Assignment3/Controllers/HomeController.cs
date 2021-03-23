@@ -11,13 +11,30 @@ namespace Assignment3.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        ////private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        ////public HomeController(ILogger<HomeController> logger)
+        ////{
+        ////    _logger = logger;
+        ////}
+
+        ////constructor
+        //private MoviesDbContext context { get; set; }
+        //public HomeController(MoviesDbContext con)
+        //{
+        //    context = con;
+        //}
+
+        private MoviesDbContext context { get; set; }
+
+        private readonly ILogger<HomeController> _logger;
+        //Constructor for the controller. Passes in the DBcontext models. 
+        public HomeController(ILogger<HomeController> logger, MoviesDbContext con)
         {
             _logger = logger;
+            //set context to the passed in model to be used in the controller
+            context = con;
         }
-
         public IActionResult Index()
         {
             return View();
@@ -39,7 +56,11 @@ namespace Assignment3.Controllers
         {
             if (ModelState.IsValid)
             {
-                TempStorage.AddApplication(applicationResponse);
+                //add application to database
+                context.Movies.Add(applicationResponse);
+                context.SaveChanges();
+                //update database
+                //ApplicationList.AddApplication(applicationResponse);
                 return View("Confirmation", applicationResponse);
             }
             else
@@ -49,7 +70,7 @@ namespace Assignment3.Controllers
         }
         public IActionResult MoviesList()
         {
-            return View(TempStorage.Applications);
+            return View(ApplicationList.Applications);
         }
         public IActionResult Privacy()
         {

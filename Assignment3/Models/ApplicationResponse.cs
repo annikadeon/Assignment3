@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace Assignment3.Models
 {
+    //all the properties for when you submit a new movie
     public class ApplicationResponse 
     {
+        //movie id, generate by asp.net
+        [Key]
+        public int MovieID { get; set; }
         [Required]
         public string Title { get; set; }
         [Required]
