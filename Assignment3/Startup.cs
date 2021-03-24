@@ -35,6 +35,8 @@ namespace Assignment3
                options.UseSqlite(Configuration["ConnectionStrings:MovieDatabaseConnection"]);
             });
         }
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -44,7 +46,7 @@ namespace Assignment3
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
@@ -53,7 +55,7 @@ namespace Assignment3
             app.UseRouting();
 
             app.UseAuthorization();
-
+            //endpoints to show the route through the pages in the url
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

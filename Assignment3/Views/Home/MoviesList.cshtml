@@ -8,55 +8,20 @@
 <div>
 
     <h2>Here are the movies currently in the directory: </h2>
-    <table>
+    <table class="center table text-center table-striped table-bordered">
         <thead>
             <tr><th>Title</th><th>Category</th><th>Year</th><th>Director</th><th>Rating</th><th>Edited</th><th>Lent</th><th>Notes</th></tr>
         </thead>
 
         <tbody>
+
             @foreach (Assignment3.Models.ApplicationResponse x in Model)
             {
-                @if (x.Title == "Independence Day") continue;
-                else
-                {
-            <tr>
-                <td>@x.Title</td>
-                <td>@x.Category</td>
-                <td>@x.Year</td>
-                <td>@x.Director</td>
-                <td>@x.Rating</td>
-                @if (x.Edited == true)
-                {
-                    <td>Yes</td>
-                }
-                else
-                {
-                    <td></td>
-                }
-                <td>@x.Lent</td>
-                <td>@x.Notes</td>
-
-                <td>
-                    <a class="btn btn-sm btn-info navbar-btn">
-                        Edit
-                    </a>
-                </td>
-                <td>
-                    <form asp-page-handler="Remove" method="post">
-                        <input type="hidden" name="MovieID"
-                               @*value="@line.Book.BookID"*@ />
-                        <input type="hidden" @*name="returnUrl"*@
-                               @*value="@Model.ReturnUrl"*@ />
-                        <button type="submit" class="btn btn-sm btn-danger">
-                            Remove
-                        </button>
-                    </form>
-                </td>
-            </tr>
-                    
-                }
-
+                <!-- See the MyMovieSummary file for the partial view-->
+                <partial name="SharedMoviesList" model="x" />
             }
+
+
         </tbody>
     </table>
 
